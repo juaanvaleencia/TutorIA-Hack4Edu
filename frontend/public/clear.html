@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpiar y Recargar - TutorIA</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .status {
+            font-size: 4rem;
+            margin: 2rem 0;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .success {
+            color: #10b981;
+        }
+        .info {
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Limpieza de Datos</h1>
+        <div class="status">⏳</div>
+        <p id="message">Limpiando datos del navegador...</p>
+        <p class="info" id="info">Espera un momento...</p>
+        <button id="reloadBtn" style="display: none;" onclick="goHome()">Ir a TutorIA</button>
+    </div>
+
+    <script>
+        function cleanAndReload() {
+            try {
+                // Limpiar localStorage
+                localStorage.clear();
+                
+                // Limpiar sessionStorage
+                sessionStorage.clear();
+                
+                // Actualizar UI
+                document.querySelector('.status').textContent = '✅';
+                document.getElementById('message').textContent = '¡Limpieza completada!';
+                document.getElementById('info').textContent = 'Datos del navegador eliminados correctamente';
+                document.getElementById('reloadBtn').style.display = 'inline-block';
+                
+                console.log('✅ localStorage y sessionStorage limpiados');
+            } catch (error) {
+                document.querySelector('.status').textContent = '❌';
+                document.getElementById('message').textContent = 'Error al limpiar';
+                document.getElementById('info').textContent = error.message;
+                console.error('Error:', error);
+            }
+        }
+        
+        function goHome() {
+            window.location.href = '/';
+        }
+        
+        // Ejecutar limpieza automáticamente al cargar
+        setTimeout(cleanAndReload, 500);
+    </script>
+</body>
+</html>
+
